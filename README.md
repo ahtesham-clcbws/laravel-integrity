@@ -15,10 +15,13 @@ Zero Runtime Production Overhead.
 ## Documentation
 
 For detailed configurations, lists of checks, and architectural references, visit our [official documentation](https://ahtesham-clcbws.github.io/laravel-integrity/):
+- **[Getting Started & Installation](https://ahtesham-clcbws.github.io/laravel-integrity/getting-started)**
+- **[Configuration Guide](https://ahtesham-clcbws.github.io/laravel-integrity/configuration)**
 - **[Architecture & Splicing Deep-Dive](https://ahtesham-clcbws.github.io/laravel-integrity/architecture)**
 - **[Full Checks Reference Guide](https://ahtesham-clcbws.github.io/laravel-integrity/checks-reference)**
 - **[CLI Configuration & Troubleshooting](https://ahtesham-clcbws.github.io/laravel-integrity/cli-troubleshooting)**
 - **[Composer Hooks Integration](https://ahtesham-clcbws.github.io/laravel-integrity/composer-hooks)**
+- **[Extending & Custom Checks](https://ahtesham-clcbws.github.io/laravel-integrity/extending)**
 
 ---
 

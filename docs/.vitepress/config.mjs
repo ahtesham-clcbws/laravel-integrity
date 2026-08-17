@@ -15,10 +15,24 @@ export default withMermaid(defineConfig({
     ],
     sidebar: [
       {
-        text: 'Guide',
+        text: 'Getting Started',
+        items: [
+          { text: 'Installation', link: '/getting-started' },
+          { text: 'Configuration', link: '/configuration' }
+        ]
+      },
+      {
+        text: 'Core Concepts',
         items: [
           { text: 'Architecture', link: '/architecture' },
-          { text: 'Checks Reference', link: '/checks-reference' },
+          { text: 'Checks Reference', link: '/checks-reference' }
+        ]
+      },
+      {
+        text: 'Advanced & Tooling',
+        items: [
+          { text: 'Extending (Custom Checks)', link: '/extending' },
+          { text: 'Baseline Management', link: '/baseline' },
           { text: 'Composer Hooks', link: '/composer-hooks' },
           { text: 'CLI Troubleshooting', link: '/cli-troubleshooting' }
         ]
