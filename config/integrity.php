@@ -48,6 +48,7 @@ return [
         Clcbws\LaravelIntegrity\Checks\Hygiene\RootNamespaceFacadeCheck::class,
         Clcbws\LaravelIntegrity\Checks\Hygiene\DirectEnvCallCheck::class,
         Clcbws\LaravelIntegrity\Checks\Hygiene\UnusedImportCheck::class,
+        Clcbws\LaravelIntegrity\Checks\Hygiene\MissingEnvVariableCheck::class,
 
         // Routing & Blade
         Clcbws\LaravelIntegrity\Checks\Routing\RouteSerializationCheck::class,
@@ -67,9 +68,13 @@ return [
         Clcbws\LaravelIntegrity\Checks\Database\PendingMigrationCheck::class,
         Clcbws\LaravelIntegrity\Checks\Database\MigrationSyntaxCheck::class,
         Clcbws\LaravelIntegrity\Checks\Database\ModelTableMappingCheck::class,
+        Clcbws\LaravelIntegrity\Checks\Database\DatabaseIndexCheck::class,
         Clcbws\LaravelIntegrity\Checks\Architecture\DeadProviderCheck::class,
         Clcbws\LaravelIntegrity\Checks\Architecture\PolicyMethodMappingCheck::class,
         Clcbws\LaravelIntegrity\Checks\Architecture\EventListenerMappingCheck::class,
+        Clcbws\LaravelIntegrity\Checks\Architecture\UnreferencedPrivateMethodCheck::class,
+        // Security
+        Clcbws\LaravelIntegrity\Checks\Security\ModelMassAssignmentCheck::class,
     ],
 
     /*

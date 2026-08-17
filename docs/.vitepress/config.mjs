@@ -10,7 +10,7 @@ export default withMermaid(defineConfig({
     logo: '/logo.jpg',
     nav: [
       { text: 'Home', link: '/' },
-      { text: 'Docs', link: '/architecture' },
+      { text: 'Docs', link: '/getting-started' },
       { text: 'Packagist', link: 'https://packagist.org/packages/clcbws/laravel-integrity' }
     ],
     sidebar: [
@@ -18,7 +18,8 @@ export default withMermaid(defineConfig({
         text: 'Getting Started',
         items: [
           { text: 'Installation', link: '/getting-started' },
-          { text: 'Configuration', link: '/configuration' }
+          { text: 'Configuration', link: '/configuration' },
+          { text: 'Changelog', link: '/changelog' }
         ]
       },
       {
