@@ -33,7 +33,7 @@ For detailed configurations, lists of checks, and architectural references, visi
 
 ## Installation
 
-You can install the package via Composer:
+You can install the package via Composer (view on [Packagist](https://packagist.org/packages/clcbws/laravel-integrity)):
 
 ```bash
 composer require clcbws/laravel-integrity --dev

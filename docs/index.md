@@ -10,7 +10,10 @@ hero:
       link: /architecture
     - theme: alt
       text: View on GitHub
-      link: https://github.com/CLC-Broadway-Web-Services/laravel-integrity
+      link: https://github.com/ahtesham-clcbws/laravel-integrity
+    - theme: alt
+      text: View on Packagist
+      link: https://packagist.org/packages/clcbws/laravel-integrity
 features:
   - title: Zero Regex Scraping
     details: Uses Container Reflection to ask Laravel directly about its Routes, Events, and Policies.

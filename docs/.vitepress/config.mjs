@@ -9,7 +9,8 @@ export default defineConfig({
     logo: '/logo.jpg',
     nav: [
       { text: 'Home', link: '/' },
-      { text: 'Docs', link: '/architecture' }
+      { text: 'Docs', link: '/architecture' },
+      { text: 'Packagist', link: 'https://packagist.org/packages/clcbws/laravel-integrity' }
     ],
     sidebar: [
       {
