@@ -23,7 +23,7 @@ export default defineConfig({
       }
     ],
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/CLC-Broadway-Web-Services/laravel-integrity' }
+      { icon: 'github', link: 'https://github.com/ahtesham-clcbws/laravel-integrity' }
     ]
   }
 })
