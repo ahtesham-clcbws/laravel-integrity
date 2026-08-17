@@ -1,6 +1,6 @@
-# Laravel Integrity
+# Laravel-Integrity: Post-Deploy Code Integrity Checks
 
-![Laravel Integrity Banner](art/banner.jpg) Suite
+![Laravel Integrity Banner](art/banner.jpg)
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/clcbws/laravel-integrity.svg?style=flat-square)](https://packagist.org/packages/clcbws/laravel-integrity)
 [![Total Downloads](https://img.shields.io/packagist/dt/clcbws/laravel-integrity.svg?style=flat-square)](https://packagist.org/packages/clcbws/laravel-integrity)
