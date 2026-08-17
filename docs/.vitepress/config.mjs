@@ -1,6 +1,7 @@
 import { defineConfig } from 'vitepress'
+import { withMermaid } from 'vitepress-plugin-mermaid'
 
-export default defineConfig({
+export default withMermaid(defineConfig({
   title: "Laravel Integrity",
   description: "High-Fidelity Static AST & Container Reflection Integrity Suite",
   base: "/laravel-integrity/",
@@ -27,4 +28,4 @@ export default defineConfig({
       { icon: 'github', link: 'https://github.com/ahtesham-clcbws/laravel-integrity' }
     ]
   }
-})
+}))
