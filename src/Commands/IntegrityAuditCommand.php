@@ -12,6 +12,7 @@ use Clcbws\LaravelIntegrity\Support\FileScanner;
 use Clcbws\LaravelIntegrity\Support\BaselineManager;
 use Clcbws\LaravelIntegrity\Formatters\ConsoleTableFormatter;
 use Clcbws\LaravelIntegrity\Formatters\JsonFormatter;
+use Clcbws\LaravelIntegrity\Formatters\HtmlFormatter;
 use Clcbws\LaravelIntegrity\Formatters\FileLogFormatter;
 
 final class IntegrityAuditCommand extends Command
@@ -22,7 +23,7 @@ final class IntegrityAuditCommand extends Command
     protected $signature = 'integrity:check
                             {--strict : Fail on Medium, High, or Critical severity issues}
                             {--dirty : Run checks only on git staged/modified files}
-                            {--format=text : Output format (text or json)}
+                            {--format=text : Output format (text, json, or html)}
                             {--only= : Filter checks by category (comma-separated list)}
                             {--full : Include slow/expensive checks}';
 
@@ -105,11 +106,13 @@ final class IntegrityAuditCommand extends Command
         }
 
         // Output formatting
-        $format = $this->option('format') === 'json' ? 'json' : 'text';
+        $format = in_array($this->option('format'), ['json', 'html']) ? $this->option('format') : 'text';
 
         if ($format === 'json') {
             $formatter = new JsonFormatter($this->output);
+            $formatter = new HtmlFormatter($this->output);
         } else {
+            $formatter = new JsonFormatter($this->output);
             $formatter = new ConsoleTableFormatter($this->output);
         }
 

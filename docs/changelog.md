@@ -2,7 +2,14 @@
 
 All notable changes to **Laravel Integrity** will be documented in this file.
 
-## [v1.1.0] - Upcoming
+## [v1.2.0] - Upcoming
+### Added
+- **HTML Reports**: Added  to generate standalone HTML compliance reports.
+- **N+1 Query Detection**: Added  to statically detect database queries and lazy loading inside loops.
+- **Blade Strict Types**: Added  to verify that required  are passed to Blade components.
+- **Automated PR Reviewer**: Added  to automatically post AST analysis results directly to GitHub PRs as inline comments.
+
+## [v1.1.0] - 2024-10-24
 ### Added
 - **AI Agent Integration (MCP Server)**: Added `php artisan integrity:mcp` command to expose local reflection tools to AI Agents like Cursor via Model Context Protocol.
 - **Security Audits**: Added `ModelMassAssignmentCheck` to statically detect models using `protected $guarded = [];`.

@@ -57,6 +57,7 @@ return [
         Clcbws\LaravelIntegrity\Checks\Blade\BladeCompileCheck::class,
         Clcbws\LaravelIntegrity\Checks\Blade\MissingViewPathCheck::class,
         Clcbws\LaravelIntegrity\Checks\Blade\OrphanedComponentCheck::class,
+        Clcbws\LaravelIntegrity\Checks\Blade\BladeComponentStrictTypeCheck::class,
 
         // Livewire
         Clcbws\LaravelIntegrity\Checks\Livewire\ComponentManifestCheck::class,
@@ -73,6 +74,7 @@ return [
         Clcbws\LaravelIntegrity\Checks\Architecture\PolicyMethodMappingCheck::class,
         Clcbws\LaravelIntegrity\Checks\Architecture\EventListenerMappingCheck::class,
         Clcbws\LaravelIntegrity\Checks\Architecture\UnreferencedPrivateMethodCheck::class,
+        Clcbws\LaravelIntegrity\Checks\Architecture\NPlusOneStaticCheck::class,
         // Security
         Clcbws\LaravelIntegrity\Checks\Security\ModelMassAssignmentCheck::class,
     ],

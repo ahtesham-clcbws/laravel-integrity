@@ -7,6 +7,7 @@ namespace Clcbws\LaravelIntegrity;
 use Illuminate\Support\ServiceProvider;
 use Clcbws\LaravelIntegrity\Commands\IntegrityAuditCommand;
 use Clcbws\LaravelIntegrity\Commands\IntegrityMcpCommand;
+use Clcbws\LaravelIntegrity\Commands\IntegrityPrReviewCommand;
 use Clcbws\LaravelIntegrity\Commands\IntegrityFixCommand;
 use Clcbws\LaravelIntegrity\Commands\IntegrityBaselineCommand;
 use Clcbws\LaravelIntegrity\Support\FileScanner;
@@ -39,6 +40,7 @@ final class IntegrityServiceProvider extends ServiceProvider
             $this->commands([
                 IntegrityAuditCommand::class,
                 IntegrityMcpCommand::class,
+                IntegrityPrReviewCommand::class,
                 IntegrityFixCommand::class,
                 IntegrityBaselineCommand::class,
             ]);
