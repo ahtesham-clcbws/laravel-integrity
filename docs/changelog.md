@@ -2,7 +2,22 @@
 
 All notable changes to **Laravel Integrity** will be documented in this file.
 
-## [v1.2.0] - Upcoming
+## [v1.3.1] - 2026-08-20
+### Fixed
+- Synced `CHANGELOG.md` with docs.
+
+## [v1.3.0] - 2026-08-20
+### Added
+- **Configuration-driven Exclusions**: Added `orphaned_component_exclusions` to config to prevent false positives from built-in directives (`slot`, `dynamic-component`) and 3rd-party UI libraries like Mary UI (`mary-`).
+
+### Fixed
+- **Legacy Checks Migration**: Restored and modernized 6 legacy checks (`MissingEnvVariableCheck`, `DatabaseIndexCheck`, `NPlusOneStaticCheck`, `UnreferencedPrivateMethodCheck`, `BladeComponentStrictTypeCheck`, `ModelMassAssignmentCheck`) to properly implement the new `CheckInterface` and `CheckResult` architecture.
+- **AST Parser Fatal Errors**: Fixed fatal errors occurring during AST parsing (`namespacedName` property access) by ensuring `NameResolver` automatically runs at the beginning of the `AstParserEngine` pipeline.
+- **Livewire v3 Resolution**: Fixed `ComponentRegistryBridge` to correctly resolve Livewire v3 components using `\Livewire\Mechanisms\ComponentRegistry` instead of the removed `Livewire::getClass()` facade.
+- **Seeder Namespace Hook**: Fixed `SeederClassExistsCheck` using the wrong AST hook (`leaveNode` vs `enterNode`).
+- **Formatter Assignment**: Fixed an issue in `IntegrityAuditCommand` where the `--format=json` option was silently overwritten.
+
+## [v1.2.0] - 2026-08-17
 ### Added
 - **HTML Reports**: Added `--format=html` to generate standalone HTML compliance reports.
 - **N+1 Query Detection**: Added `NPlusOneStaticCheck` to statically detect database queries and lazy loading inside loops.
