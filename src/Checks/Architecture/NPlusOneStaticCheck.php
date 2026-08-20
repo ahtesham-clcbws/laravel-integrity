@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace Clcbws\LaravelIntegrity\Checks\Architecture;
 
-use Clcbws\LaravelIntegrity\Contracts\Check;
-use Clcbws\LaravelIntegrity\Data\Issue;
-use PhpParser\ParserFactory;
+use Clcbws\LaravelIntegrity\Contracts\CheckInterface;
+use Clcbws\LaravelIntegrity\Engine\CheckResult;
+use Clcbws\LaravelIntegrity\Engine\Issue;
+use Clcbws\LaravelIntegrity\Engine\Severity;
+use Clcbws\LaravelIntegrity\Engine\AstParserEngine;
+use Clcbws\LaravelIntegrity\Support\FileScanner;
 use PhpParser\NodeFinder;
 use PhpParser\Node\Stmt\Foreach_;
 use PhpParser\Node\Stmt\While_;
@@ -14,8 +17,18 @@ use PhpParser\Node\Stmt\For_;
 use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Expr\PropertyFetch;
 
-class NPlusOneStaticCheck implements Check
+final class NPlusOneStaticCheck implements CheckInterface
 {
+    public function __construct(
+        private readonly AstParserEngine $parser,
+        private readonly FileScanner $scanner
+    ) {}
+
+    public function key(): string
+    {
+        return 'n-plus-one';
+    }
+
     public function name(): string
     {
         return "Static N+1 Query Detection";
@@ -31,18 +44,21 @@ class NPlusOneStaticCheck implements Check
         return true;
     }
 
-    public function run(array $files, bool $full = false): array
+    public function run(): CheckResult
     {
-        if (!$full) return [];
+        $start = microtime(true);
         $issues = [];
-        $parser = (new ParserFactory)->createForNewestSupportedVersion();
+        
+        $files = $this->scanner->scanPhpFiles();
         $nodeFinder = new NodeFinder;
 
         foreach ($files as $file) {
-            $code = file_get_contents($file->getPathname());
+            $code = file_get_contents($file);
+            if ($code === false) continue;
             try {
-                $stmts = $parser->parse($code);
-            } catch (\Exception $e) { continue; }
+                $stmts = $this->parser->parse($code);
+            } catch (\Throwable $e) { continue; }
+            if ($stmts === null) continue;
 
             // Find all loops
             $loops = array_merge(
@@ -59,20 +75,29 @@ class NPlusOneStaticCheck implements Check
                         $methodName = $call->name->toString();
                         if (in_array($methodName, ["get", "first", "all", "count", "save", "update", "delete", "create"])) {
                             $issues[] = new Issue(
-                                $file->getPathname(),
-                                $call->getLine(),
-                                "Potential N+1 Query: Database call `->{$methodName}()` detected inside a loop."
+                                severity: Severity::High,
+                                message: "Potential N+1 Query: Database call `->{$methodName}()` detected inside a loop.",
+                                file: $file,
+                                line: $call->getLine(),
+                                snippet: "->{$methodName}()",
+                                fixable: false,
+                                context: [
+                                    'check_name' => $this->name(),
+                                    'file_path' => $file,
+                                    'method_name' => $methodName,
+                                ]
                             );
                         }
                     }
                 }
-                
-                // Look for dynamic property fetching that often triggers lazy loading (e.g. $user->posts)
-                // This is harder to perfectly static analyze without type inference, so we flag highly suspicious ones.
-                // We will skip property fetches for now to avoid massive false positives, but keep method calls.
             }
         }
 
-        return $issues;
+        return new CheckResult(
+            passed: empty($issues),
+            checkKey: $this->key(),
+            issues: $issues,
+            durationMs: (microtime(true) - $start) * 1000
+        );
     }
 }

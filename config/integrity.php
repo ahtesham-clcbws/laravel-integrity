@@ -18,6 +18,21 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Orphaned Component Exclusions
+    |--------------------------------------------------------------------------
+    | Ignore built-in or 3rd-party component tags when checking for orphans.
+    */
+    'orphaned_component_exclusions' => [
+        'slot',
+        'slot:',
+        'dynamic-component',
+        'mail::',
+        'heroicon-',
+        'mary-', // Mary UI components
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Excluded Paths / Files
     |--------------------------------------------------------------------------
     */
@@ -69,12 +84,12 @@ return [
         Clcbws\LaravelIntegrity\Checks\Database\PendingMigrationCheck::class,
         Clcbws\LaravelIntegrity\Checks\Database\MigrationSyntaxCheck::class,
         Clcbws\LaravelIntegrity\Checks\Database\ModelTableMappingCheck::class,
-        Clcbws\LaravelIntegrity\Checks\Database\DatabaseIndexCheck::class,
         Clcbws\LaravelIntegrity\Checks\Architecture\DeadProviderCheck::class,
         Clcbws\LaravelIntegrity\Checks\Architecture\PolicyMethodMappingCheck::class,
         Clcbws\LaravelIntegrity\Checks\Architecture\EventListenerMappingCheck::class,
-        Clcbws\LaravelIntegrity\Checks\Architecture\UnreferencedPrivateMethodCheck::class,
+        Clcbws\LaravelIntegrity\Checks\Database\DatabaseIndexCheck::class,
         Clcbws\LaravelIntegrity\Checks\Architecture\NPlusOneStaticCheck::class,
+        Clcbws\LaravelIntegrity\Checks\Architecture\UnreferencedPrivateMethodCheck::class,
         // Security
         Clcbws\LaravelIntegrity\Checks\Security\ModelMassAssignmentCheck::class,
     ],

@@ -38,8 +38,12 @@ final class AstParserEngine
     public function traverse(array $stmts, array $visitors): array
     {
         $traverser = new NodeTraverser();
+        $traverser->addVisitor(new \PhpParser\NodeVisitor\NameResolver());
+        
         foreach ($visitors as $visitor) {
-            $traverser->addVisitor($visitor);
+            if (!$visitor instanceof \PhpParser\NodeVisitor\NameResolver) {
+                $traverser->addVisitor($visitor);
+            }
         }
 
         return $traverser->traverse($stmts);

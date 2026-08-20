@@ -58,8 +58,13 @@ final class IntegrityAuditCommand extends Command
                 continue;
             }
 
-            /** @var CheckInterface $check */
-            $check = $this->laravel->make($checkClass);
+            try {
+                /** @var CheckInterface $check */
+                $check = $this->laravel->make($checkClass);
+            } catch (\Throwable $e) {
+                $this->warn("Could not load check [{$checkClass}]: " . $e->getMessage());
+                continue;
+            }
 
             if (!$check instanceof CheckInterface) {
                 continue;
@@ -106,13 +111,17 @@ final class IntegrityAuditCommand extends Command
         }
 
         // Output formatting
-        $format = in_array($this->option('format'), ['json', 'html']) ? $this->option('format') : 'text';
+        $format = match($this->option('format')) {
+            'json' => 'json',
+            'html' => 'html',
+            default => 'text',
+        };
 
         if ($format === 'json') {
             $formatter = new JsonFormatter($this->output);
+        } elseif ($format === 'html') {
             $formatter = new HtmlFormatter($this->output);
         } else {
-            $formatter = new JsonFormatter($this->output);
             $formatter = new ConsoleTableFormatter($this->output);
         }
 

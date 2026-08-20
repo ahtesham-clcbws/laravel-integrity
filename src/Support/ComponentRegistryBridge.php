@@ -24,7 +24,9 @@ final class ComponentRegistryBridge
         }
 
         try {
-            // Standard Livewire 3 method
+            if (class_exists(\Livewire\Mechanisms\ComponentRegistry::class)) {
+                return app(\Livewire\Mechanisms\ComponentRegistry::class)->getClass($alias);
+            }
             return \Livewire\Livewire::getClass($alias);
         } catch (\Throwable) {
             return null;

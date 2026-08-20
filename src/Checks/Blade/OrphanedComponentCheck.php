@@ -57,6 +57,24 @@ final class OrphanedComponentCheck implements CheckInterface
                     // Convert offset to line number
                     $line = substr_count(substr($content, 0, $offset), PHP_EOL) + 1;
 
+                    // Ignore components configured in exclusions
+                    $exclusions = config('integrity.orphaned_component_exclusions', ['slot', 'dynamic-component', 'mail::', 'heroicon-']);
+                    $shouldIgnore = false;
+                    foreach ($exclusions as $exclusion) {
+                        if ($componentName === $exclusion || str_starts_with($componentName, rtrim($exclusion, '-') . '-')) {
+                            $shouldIgnore = true;
+                            break;
+                        }
+                        // Also handle direct colon prefixes like slot: or mail::
+                        if (str_ends_with($exclusion, ':') && str_starts_with($componentName, $exclusion)) {
+                            $shouldIgnore = true;
+                            break;
+                        }
+                    }
+                    if ($shouldIgnore) {
+                        continue;
+                    }
+
                     if (!$this->componentExists($componentName)) {
                         $issues[] = new Issue(
                             severity: Severity::High,

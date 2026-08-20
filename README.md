@@ -48,6 +48,12 @@ Publish the default configuration file:
 php artisan vendor:publish --tag=integrity-config
 ```
 
+> [!IMPORTANT]
+> **For Existing Projects:** Before running `integrity:check` on an existing codebase, you **must** generate a baseline. This will snapshot all pre-existing issues (like missing strict types) so they do not fail your CI/CD pipeline.
+> ```bash
+> php artisan integrity:baseline
+> ```
+
 ---
 
 ## Usage

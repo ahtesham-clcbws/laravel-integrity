@@ -105,7 +105,7 @@ final class LivewireComponentMapper
                 public function enterNode(Node $node)
                 {
                     if ($node instanceof Class_) {
-                        $this->classFqn = $node->namespacedName ? $node->namespacedName->toString() : null;
+                        $this->classFqn = (isset($node->namespacedName) && $node->namespacedName) ? $node->namespacedName->toString() : null;
                     }
 
                     // Extract static call to view('livewire.name')

@@ -61,7 +61,7 @@ final class ContainerReflectionEngine
                 public function enterNode(Node $node)
                 {
                     if ($node instanceof Class_) {
-                        $this->classFqn = $node->namespacedName ? $node->namespacedName->toString() : null;
+                        $this->classFqn = (isset($node->namespacedName) && $node->namespacedName) ? $node->namespacedName->toString() : null;
                     }
                     return null;
                 }

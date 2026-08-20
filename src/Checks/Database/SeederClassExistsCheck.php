@@ -75,7 +75,7 @@ final class SeederClassExistsCheck implements CheckInterface
             $visitor = new class extends NodeVisitorAbstract {
                 public array $seederCalls = [];
 
-                public function enterNode(Node $node)
+                public function leaveNode(Node $node)
                 {
                     if ($node instanceof MethodCall && 
                         $node->var instanceof Variable && 
