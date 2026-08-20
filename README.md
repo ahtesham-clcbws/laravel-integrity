@@ -29,8 +29,10 @@ For detailed configurations, lists of checks, and architectural references, visi
 
 1. **Module Residue Cleanup**: Identifies orphaned views, dangling controller actions, dead service providers, and unlinked seeders.
 2. **Template & Livewire Integrity**: Audits Blade templates and Livewire component views for named route existence, correct `<livewire:alias />` resolution, public action methods, and public model binding property visibilities.
-3. **Import & Type Hygiene (with `--fix`)**: Enforces strict types (`declare(strict_types=1);`), repairs inline root namespace facade calls (e.g. `\DB::` -> `DB::`), and cleans up unused imports.
+3. **Import & Type Hygiene (with `--fix`)**: Enforces strict types (`declare(strict_types=1);`), repairs inline root namespace facade calls (e.g. `\DB::` -> `DB::`), cleans up unused imports, and validates `env()` calls against `.env.example`.
 4. **Post-Deploy Pre-Flight checks**: Checks for closure routes (which prevents serialization under `route:cache`), unapplied database migrations, syntax errors in Blade templates, and Eloquent models mapping to missing database tables.
+5. **Database Index Hygiene**: Detects missing indexes on foreign key columns (e.g. `*_id`) via DBAL.
+6. **Security & Best Practices**: Statically catches N+1 queries in loops, unreferenced private methods (dead code), mass assignment risks (`$guarded = []`), and enforces strict types on Blade component `@props`.
 
 ---
 
